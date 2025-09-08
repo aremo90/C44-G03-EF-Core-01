@@ -1,10 +1,18 @@
-﻿namespace ConsoleApp1
+﻿using ConsoleApp1.Context;
+
+namespace ConsoleApp1
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+
+            #region Database connection
+
+            using ITIDbContext context = new ITIDbContext();
+
+            #endregion
+
         }
     }
 }

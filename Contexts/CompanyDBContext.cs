@@ -27,5 +27,6 @@ namespace ConsoleApp1.Contexts
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

@@ -89,32 +89,82 @@ namespace ConsoleApp1
 
             using CompanyDBContext dBContext = new CompanyDBContext(); // open connection
 
-            Employee employee = new Employee()
-            {
-                // ID = 1, not vaild because identity column
-                Name = "Ahmed",
-                Salary = 5000,
-                Age = 25
-            };
+            #region CRUD Operations
 
-            Console.WriteLine(dBContext.Entry<Employee>(employee).State); // Detached
-            // to start add 
-            // 1-
-            dBContext.Employees.Add(employee);
-            // 2-
-            dBContext.Set<Employee>().Add(employee);
-            // 3-
-            dBContext.Add(employee);
+            #region Insert
+            //Employee employee = new Employee()
+            //{
+            //    // ID = 1, not vaild because identity column
+            //    Name = "Ahmed",
+            //    Salary = 5000,
+            //    Age = 25
+            //};
 
-            Console.WriteLine(dBContext.Entry<Employee>(employee).State); // Added
+            //Console.WriteLine(dBContext.Entry<Employee>(employee).State); // Detached
+            //// to start add 
+            //// 1-
+            //dBContext.Employees.Add(employee);
+            //// 2-
+            //dBContext.Set<Employee>().Add(employee);
+            //// 3-
+            //dBContext.Add(employee);
+
+            //Console.WriteLine(dBContext.Entry<Employee>(employee).State); // Added
 
             // to save in database
             // call SaveChanges()
-            dBContext.SaveChanges();
+            //dBContext.SaveChanges();
 
             /* Note:-
              *      With Every Run to program it will add new record
              */
+
+            #endregion
+
+            #region Select
+
+            //var emp01 = dBContext.Employees.Where(e => e.Id == 1).FirstOrDefault(); // search by primary key
+            //var emp01 = dBContext.Employees.FirstOrDefault( E => E.Id == 1); // search by primary key
+
+            //if (emp01 != null)
+            //{
+            //    Console.WriteLine($"ID: {emp01.Id} , Name: {emp01.Name} , Salary: {emp01.Salary} , Age: {emp01.Age}");
+            //}
+
+            #endregion
+
+            #region Update
+
+            //var emp02 = dBContext.Employees.FirstOrDefault(E => E.Id == 1);
+
+            //if ( emp02 != null)
+            //{ 
+            //    Console.WriteLine(dBContext.Entry<Employee>(emp02).State); // Unchanged
+            //    emp02.Name = "Mohamed";
+            //    emp02.Salary = 6000;
+            //    emp02.Age = 26;
+
+            //    dBContext.Update(emp02);
+            //    Console.WriteLine(dBContext.Entry<Employee>(emp02).State); // Modified
+            //    dBContext.SaveChanges();
+            //}
+
+            #endregion
+
+            #region Delete
+
+            //var emp03 = dBContext.Employees.FirstOrDefault(E => E.Id == 2);
+            //if (emp03 != null)
+            //{
+            //    Console.WriteLine(dBContext.Entry<Employee>(emp03).State); // Unchanged
+            //    dBContext.Remove(emp03);
+            //    Console.WriteLine(dBContext.Entry<Employee>(emp03).State); // Deleted
+            //    dBContext.SaveChanges();
+            //}
+
+            #endregion
+            #endregion
+
 
             #endregion
         }

@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.Contexts;
+using ConsoleApp1.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConsoleApp1
@@ -86,8 +87,34 @@ namespace ConsoleApp1
 
             #region Session 02
 
-            using CompanyDBContext dBContext = new CompanyDBContext();
+            using CompanyDBContext dBContext = new CompanyDBContext(); // open connection
 
+            Employee employee = new Employee()
+            {
+                // ID = 1, not vaild because identity column
+                Name = "Ahmed",
+                Salary = 5000,
+                Age = 25
+            };
+
+            Console.WriteLine(dBContext.Entry<Employee>(employee).State); // Detached
+            // to start add 
+            // 1-
+            dBContext.Employees.Add(employee);
+            // 2-
+            dBContext.Set<Employee>().Add(employee);
+            // 3-
+            dBContext.Add(employee);
+
+            Console.WriteLine(dBContext.Entry<Employee>(employee).State); // Added
+
+            // to save in database
+            // call SaveChanges()
+            dBContext.SaveChanges();
+
+            /* Note:-
+             *      With Every Run to program it will add new record
+             */
 
             #endregion
         }

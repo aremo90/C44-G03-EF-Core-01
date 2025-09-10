@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,8 +30,8 @@ namespace ConsoleApp1.Contexts
         #region FluentApi
 
         // to applay mapping with Fluent api You must override method OnModelCreating
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
             //modelBuilder.Entity<Employee>().HasKey(e => e.Id);
 
 
@@ -53,17 +54,22 @@ namespace ConsoleApp1.Contexts
 
 
             //another Way
-            modelBuilder.Entity<Employee>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id)
-                    .UseIdentityColumn(10, 10);
-                entity.Property(e => e.Name)
-                    .HasColumnName("EmpName")
-                    .HasColumnType("varchar(50)")
-                    .HasMaxLength(50)
-                    .IsRequired(false);
-            });
+            //modelBuilder.Entity<Employee>(entity =>
+            //{
+            //    entity.HasKey(e => e.Id);
+            //    entity.Property(e => e.Id)
+            //        .UseIdentityColumn(10, 10);
+            //    entity.Property(e => e.Name)
+            //        .HasColumnName("EmpName")
+            //        .HasColumnType("varchar(50)")
+            //        .HasMaxLength(50)
+            //        .IsRequired(false);
+            //});
+        //}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); // this will track all classes implement IEntityTypeConfiguration<T> interface
         }
 
         #endregion

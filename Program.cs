@@ -7,6 +7,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            #region Session 01
             #region EF Core
 
             /*
@@ -70,7 +71,7 @@ namespace ConsoleApp1
             //    dBContext.Dispose();
             //}
 
-            using CompanyDBContext dBContext = new CompanyDBContext();
+            //using CompanyDBContext dBContext = new CompanyDBContext();
 
             //dBContext.Database.Migrate(); => bad use
 
@@ -81,7 +82,14 @@ namespace ConsoleApp1
             // use Update Database
 
             #endregion
+            #endregion
 
+            #region Session 02
+
+            using CompanyDBContext dBContext = new CompanyDBContext();
+
+
+            #endregion
         }
     }
 }

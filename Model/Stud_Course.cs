@@ -10,9 +10,11 @@ namespace ConsoleApp1.Model
 {
     internal class Stud_Course
     {
-        [Key] // to avoid Migration primary key erro
+
         public int Student_Id { get; set; }
         public int Course_Id { get; set; }
-        public int Grade { get; set; }
+        public string Grade { get; set; }
+        public Student Student { get; set; }
+        public Course Course { get; set; }
     }
 }

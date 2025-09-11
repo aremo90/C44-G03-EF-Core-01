@@ -8,9 +8,14 @@ namespace ConsoleApp1.Model
 {
     internal class Department
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
-        public int Ins_ID { get; set; }
         public DateTime HiringDate { get; set; }
+        public int? Ins_ID { get; set; }
+        public Instructor Head { get; set; }
+
+        public ICollection<Student> Students { get; set; } = new List<Student>();
+        public ICollection<Instructor> Instructors { get; set; } = new List<Instructor>();
+
     }
 }

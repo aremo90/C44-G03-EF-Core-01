@@ -8,7 +8,10 @@ namespace ConsoleApp1.Model
 {
     internal class Topic
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
+
+        public ICollection<Course> Courses { get; set; } = new List<Course>();
+
     }
 }

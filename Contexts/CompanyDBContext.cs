@@ -70,11 +70,22 @@ namespace ConsoleApp1.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); // this will track all classes implement IEntityTypeConfiguration<T> interface
+        
+            //modelBuilder.Entity<Employee>()
+            //    .HasOne(E => E.Manager)
+            //    .WithOne(E => E.MangedDept)
+            //    .HasForeignKey<Employee>(E => E.DeptMangerId);
+
+            modelBuilder.Entity<Employee>()
+                .OwnsOne(E => E.EmpAddress, Address => Address.WithOwner());
+
         }
 
         #endregion
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Department> Departments { get; set; }
     }
 }

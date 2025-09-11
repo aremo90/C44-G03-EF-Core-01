@@ -165,6 +165,17 @@ namespace ConsoleApp1
             #endregion
             #endregion
 
+            #region Relationships between Classes
+            /* 
+             *  3 ways to configure relationships :-
+             *      Navigation Properties
+             *      Fluent API
+             *      By Conventions
+             */
+
+
+            #endregion
+
 
             #endregion
         }

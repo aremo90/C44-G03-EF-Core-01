@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,17 +12,22 @@ namespace ConsoleApp1.Models
     {
         // Mapping by convention
         public int Id { get; set; }
-        // Primary Key by default
         public string? Name { get; set; }
-        // Nullable Reference Type
-        // Mapped to navchar(Max)
         public decimal Salary { get; set; }
-        // value type
-        // not allow null
-        // Decimal(18,2)
         public int Age { get; set; }
-        // value type
-        // not allow null
-        // int mapped to int
-    }
+        // Navigation Property
+        // Represent Relationship of 1
+        //[ForeignKey(nameof(DeptManger))]
+        //public int DeptMangerId { get; set; }
+        //public Department DeptManger { get; set; } = null!;
+
+        //public int DeptMangerId { get; set; }
+        //public Department Manager { get; set; }
+
+        // One to One total total
+
+        public Address EmpAddress { get; set; }
+
+
+        }
 }

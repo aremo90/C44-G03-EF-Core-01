@@ -8,6 +8,8 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            using CompanyDBContext dBContext = new CompanyDBContext(); // open connection
+
             #region Session 01
             #region EF Core
 
@@ -87,7 +89,6 @@ namespace ConsoleApp1
 
             #region Session 02
 
-            using CompanyDBContext dBContext = new CompanyDBContext(); // open connection
 
             #region CRUD Operations
 
@@ -180,6 +181,46 @@ namespace ConsoleApp1
             #endregion
 
             #region Session 03
+
+            #region Data Seed
+
+            /*
+             *      If you want to seed Data to your database thorught EF Core
+             *      
+             *      you have 3 ways to do that :-
+             *          1. Manual Data Seeding
+             *          2. Data Seeding with Migrations
+             *          3. Dynamic Data Seeding
+             */
+
+            #endregion
+            #region Manual Data Seeding
+
+            //Department dept01 = new Department()
+            //{
+            //    Name = "IT"
+            //};
+
+            //dBContext.Add(dept01);
+            //dBContext.SaveChanges();
+
+
+            //List<Department> departments = new List<Department>()
+            //{
+            //    new Department() { Name = "HR" },
+            //    new Department() { Name = "Sales" },
+            //    new Department() { Name = "Marketing" }
+            //};
+            //dBContext.AddRange(departments);
+            //dBContext.SaveChanges();
+            #endregion
+            #region migration data seeding
+
+            // to applay migration data seeding we send data in OnModelCreating method in DBContext class
+
+
+
+            #endregion
 
             #endregion
 

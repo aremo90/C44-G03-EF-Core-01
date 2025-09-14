@@ -32,64 +32,65 @@ namespace ConsoleApp1.Contexts
         // to applay mapping with Fluent api You must override method OnModelCreating
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
-            //modelBuilder.Entity<Employee>().HasKey(e => e.Id);
+        //modelBuilder.Entity<Employee>().HasKey(e => e.Id);
 
 
-            ////applay constrain
-            //modelBuilder.Entity<Employee>()
-            //    .Property(e => e.Id)
-            //    .UseIdentityColumn(1,1);
+        ////applay constrain
+        //modelBuilder.Entity<Employee>()
+        //    .Property(e => e.Id)
+        //    .UseIdentityColumn(1,1);
 
-            //// Delete constrain
-            //modelBuilder.Entity<Employee>()
-            //    .Property(e => e.Id)
-            //    .ValueGeneratedNever();
+        //// Delete constrain
+        //modelBuilder.Entity<Employee>()
+        //    .Property(e => e.Id)
+        //    .ValueGeneratedNever();
 
-            //modelBuilder.Entity<Employee>()
-            //    .Property(e => e.Name) // .Property("Name") May throw exception at runtime => if property name is changed
-            //    .HasColumnName("EmpName")
-            //    .HasColumnType("varchar(50)") // if varchar without length => default length is 1
-            //    .HasMaxLength(50)
-            //    .IsRequired();
+        //modelBuilder.Entity<Employee>()
+        //    .Property(e => e.Name) // .Property("Name") May throw exception at runtime => if property name is changed
+        //    .HasColumnName("EmpName")
+        //    .HasColumnType("varchar(50)") // if varchar without length => default length is 1
+        //    .HasMaxLength(50)
+        //    .IsRequired();
 
 
-            //another Way
-            //modelBuilder.Entity<Employee>(entity =>
-            //{
-            //    entity.HasKey(e => e.Id);
-            //    entity.Property(e => e.Id)
-            //        .UseIdentityColumn(10, 10);
-            //    entity.Property(e => e.Name)
-            //        .HasColumnName("EmpName")
-            //        .HasColumnType("varchar(50)")
-            //        .HasMaxLength(50)
-            //        .IsRequired(false);
-            //});
+        //another Way
+        //modelBuilder.Entity<Employee>(entity =>
+        //{
+        //    entity.HasKey(e => e.Id);
+        //    entity.Property(e => e.Id)
+        //        .UseIdentityColumn(10, 10);
+        //    entity.Property(e => e.Name)
+        //        .HasColumnName("EmpName")
+        //        .HasColumnType("varchar(50)")
+        //        .HasMaxLength(50)
+        //        .IsRequired(false);
+        //});
         //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); // this will track all classes implement IEntityTypeConfiguration<T> interface
-        
-            //modelBuilder.Entity<Employee>()
-            //    .HasOne(E => E.Manager)
-            //    .WithOne(E => E.MangedDept)
-            //    .HasForeignKey<Employee>(E => E.DeptMangerId);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
+            // Employee → Department (Many-to-One)
             modelBuilder.Entity<Employee>()
-                .OwnsOne(E => E.EmpAddress, Address => Address.WithOwner());
+                .HasOne(e => e.EmployeeDepartment)
+                .WithMany(d => d.Employees)
+                .HasForeignKey(e => e.DeptId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // one to many using fluent api
+            // Employee → Address (Owned Type)
             modelBuilder.Entity<Employee>()
-                .HasOne(E => E.EmployeeDepartment)
-                .WithMany(D => D.Employees)
-                .HasForeignKey("DeptId");
+                .OwnsOne(e => e.EmpAddress, a =>
+                {
+                    a.WithOwner();
+                });
 
             //modelBuilder.Entity<Department>()
-            //    .HasMany(D => D.Employees)
-            //    .WithOne(E => E.EmployeeDepartment)
-            //    .HasForeignKey("DeptId");
-
+            //    .HasData
+            //    (
+            //        new Department { Id = 4, Name = "Backend" },
+            //        new Department { Id = 5, Name = "Software" }
+            //    );
         }
 
         #endregion
@@ -98,5 +99,7 @@ namespace ConsoleApp1.Contexts
         public DbSet<User> Users { get; set; }
 
         public DbSet<Department> Departments { get; set; }
-    }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        }
 }

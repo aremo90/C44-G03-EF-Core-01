@@ -79,6 +79,17 @@ namespace ConsoleApp1.Contexts
             modelBuilder.Entity<Employee>()
                 .OwnsOne(E => E.EmpAddress, Address => Address.WithOwner());
 
+            // one to many using fluent api
+            modelBuilder.Entity<Employee>()
+                .HasOne(E => E.EmployeeDepartment)
+                .WithMany(D => D.Employees)
+                .HasForeignKey("DeptId");
+
+            //modelBuilder.Entity<Department>()
+            //    .HasMany(D => D.Employees)
+            //    .WithOne(E => E.EmployeeDepartment)
+            //    .HasForeignKey("DeptId");
+
         }
 
         #endregion

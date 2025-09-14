@@ -36,7 +36,7 @@ namespace ConsoleApp1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.Employee", b =>
@@ -61,7 +61,7 @@ namespace ConsoleApp1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.User", b =>
@@ -91,7 +91,7 @@ namespace ConsoleApp1.Migrations
 
                     b.HasKey("SSN");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.Employee", b =>
@@ -112,7 +112,7 @@ namespace ConsoleApp1.Migrations
 
                             b1.HasKey("EmployeeId");
 
-                            b1.ToTable("Employees");
+                            b1.ToTable("Employees", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("EmployeeId");

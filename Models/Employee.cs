@@ -28,6 +28,9 @@ namespace ConsoleApp1.Models
 
         public Address EmpAddress { get; set; }
 
+        [InverseProperty(nameof(Department.Employees))]
+        public Department EmployeeDepartment { get; set; } // by defult it will be 1 : 1 RS
 
-        }
+
+    }
 }

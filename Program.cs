@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.Contexts;
+using ConsoleApp1.Data;
 using ConsoleApp1.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -219,6 +220,16 @@ namespace ConsoleApp1
             // to applay migration data seeding we send data in OnModelCreating method in DBContext class
 
 
+
+            #endregion
+            #region Dynamic Data Seeding
+
+            bool flag = CompanyDbContexetSeed.Seed(dBContext);
+
+            if (flag)
+                Console.WriteLine("Data Added Susccufly");
+            else
+                Console.WriteLine("Error while adding the data");
 
             #endregion
 

@@ -15,11 +15,10 @@ namespace ConsoleApp1.Models
         public decimal Salary { get; set; }
         public int Age { get; set; }
 
-        // Owned type (Value Object)
         public Address? EmpAddress { get; set; }
 
         // Foreign Key
-        public int DeptId { get; set; }
+        public int? DeptId { get; set; }
 
         // Navigation Property (Many-to-One)
         public Department EmployeeDepartment { get; set; } = null!;

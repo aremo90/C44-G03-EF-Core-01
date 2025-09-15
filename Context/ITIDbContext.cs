@@ -59,10 +59,7 @@ namespace ConsoleApp1.Context
                 entity.Property(e => e.Ins_ID).HasColumnName("Ins_ID");
                 entity.Property(e => e.HiringDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Head)
-                      .WithMany(i => i.ManagedDepartments)
-                      .HasForeignKey(d => d.Ins_ID)
-                      .OnDelete(DeleteBehavior.SetNull);
+
             });
 
             /* ====== Instructor ====== */

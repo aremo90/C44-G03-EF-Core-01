@@ -138,6 +138,17 @@ namespace ConsoleApp1.Context
 
 
             #endregion
+
+            #region Migrate Seed
+
+            modelBuilder.Entity<Topic>()
+                .HasData
+                (
+                    new Topic { ID = 2, Name = "Java" },
+                    new Topic { ID = 3, Name = "OOP" }
+                );
+
+            #endregion
         }
     }
 }

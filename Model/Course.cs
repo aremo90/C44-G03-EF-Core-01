@@ -14,9 +14,11 @@ namespace ConsoleApp1.Model
         public string Description { get; set; }
         public int Top_Id { get; set; }
         public Topic Topic { get; set; }
-
-        public ICollection<Stud_Course> Stud_Courses { get; set; } = new List<Stud_Course>();
         public ICollection<Course_Inst> Course_Insts { get; set; } = new List<Course_Inst>();
 
+        //public ICollection<Stud_Course> Stud_Courses { get; set; } = new List<Stud_Course>();
+
+        // M2M with Student
+        public ICollection<Student> Students { get; set; }
     }
 }

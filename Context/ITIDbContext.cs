@@ -22,7 +22,7 @@ namespace ConsoleApp1.Context
         public DbSet<Model.Instructor> Instructors { get; set; }
         public DbSet<Model.Department> Departments { get; set; }
         public DbSet<Model.Course_Inst> Course_Insts { get; set; }
-        public DbSet<Model.Stud_Course> Stud_Courses { get; set; }
+        //public DbSet<Model.Stud_Course> Stud_Courses { get; set; }
         public DbSet<Model.Student> Students { get; set; }
         public DbSet<Model.Course> Courses { get; set; }
         public DbSet<Model.Topic> Topics { get; set; }
@@ -108,27 +108,6 @@ namespace ConsoleApp1.Context
                       .OnDelete(DeleteBehavior.Restrict);
             });
 
-            /* ====== Stud_Course ====== */
-            modelBuilder.Entity<Stud_Course>(entity =>
-            {
-                entity.ToTable("Stud_Course");
-
-                entity.HasKey(sc => new { sc.Student_Id, sc.Course_Id });
-
-                entity.Property(sc => sc.Student_Id).HasColumnName("stud_ID");
-                entity.Property(sc => sc.Course_Id).HasColumnName("Course_ID");
-                entity.Property(sc => sc.Grade).HasMaxLength(10);
-
-                entity.HasOne(sc => sc.Student)
-                      .WithMany(s => s.Stud_Courses)
-                      .HasForeignKey(sc => sc.Student_Id)
-                      .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(sc => sc.Course)
-                      .WithMany(c => c.Stud_Courses)
-                      .HasForeignKey(sc => sc.Course_Id)
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
 
             /* ====== Course_Inst ====== */
             modelBuilder.Entity<Course_Inst>(entity =>
@@ -151,6 +130,17 @@ namespace ConsoleApp1.Context
                       .HasForeignKey(ci => ci.Course_Id)
                       .OnDelete(DeleteBehavior.Cascade);
             });
+
+            #region M2M Student-Course 
+
+            modelBuilder.Entity<Student>()
+                        .HasMany(c => c.Courses)
+                        .WithMany(s => s.Students)
+                        .UsingEntity<Stud_Course>()
+                        .HasKey(SC => new { SC.StudentId, SC.CourseId });
+
+
+            #endregion
         }
     }
 }

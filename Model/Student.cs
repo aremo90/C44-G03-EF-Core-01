@@ -16,6 +16,9 @@ namespace ConsoleApp1.Model
         public int Dep_Id { get; set; }
         public Department Department { get; set; }
 
-        public ICollection<Stud_Course> Stud_Courses { get; set; } = new List<Stud_Course>();
+        //public ICollection<Stud_Course> Stud_Courses { get; set; } = new List<Stud_Course>();
+
+        // M2M with Course
+        public ICollection<Course> Courses { get; set; }
     }
 }

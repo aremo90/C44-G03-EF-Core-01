@@ -226,10 +226,65 @@ namespace ConsoleApp1
 
             bool flag = CompanyDbContexetSeed.Seed(dBContext);
 
-            if (flag)
-                Console.WriteLine("Data Added Susccufly");
-            else
-                Console.WriteLine("Error while adding the data");
+            //if (flag)
+            //    Console.WriteLine("Data Added Susccufly");
+            //else
+            //    Console.WriteLine("Error while adding the data");
+
+            #endregion
+
+            #region Loading Related Data [Defult Loading]
+
+            //var Emp01 = dBContext.Employees.FirstOrDefault(e => e.Id == 5);
+
+            //if (Emp01 != null)
+            //{
+            //    Console.WriteLine($"Emp Name : {Emp01.Name}");
+            //    Console.WriteLine($"Emp Age  : {Emp01.Age}");
+            //    Console.WriteLine($"Dept ID  : {Emp01.EmployeeDepartment}");
+            //}
+
+
+            //var EmpDept = (from D in dBContext.Departments
+            //               where D.Id == Emp01.DeptId
+            //               select D).FirstOrDefault();
+            //Console.WriteLine($"DeptName : {EmpDept.Name}");
+
+            #endregion
+
+            #region Eager Loading
+
+            //var Emp02 = dBContext.Employees.Include(E => E.EmployeeDepartment).FirstOrDefault(e => e.Id == 5);
+
+            //if (Emp02 != null)
+            //{
+            //    Console.WriteLine($"Emp Name : {Emp02.Name}");
+            //    Console.WriteLine($"Emp Age  : {Emp02.Age}");
+            //    Console.WriteLine($"Dept ID  : {Emp02.EmployeeDepartment?.Name}");
+            //}
+            #endregion
+
+            #region Explicit Loading
+            // casue delay in loading related data for first time not noticeble but it exixit
+
+            // Manual loading
+            // two requeries to database
+            // first request to retrieve data
+            // second request to retrieve related data
+
+            var emp01 = dBContext.Employees.FirstOrDefault(e => e.Id == 5); // Data from Employees table
+            
+            if(emp01 != null)
+            {
+                Console.WriteLine($"Emp Name : {emp01.Name}");
+                Console.WriteLine($"Dept ID  : {emp01.DeptId}");
+                //Console.WriteLine($"Dept Name : {emp01.EmployeeDepartment.Name}"); => Error because EmployeeDepartment is null
+
+                dBContext.Entry(emp01).Reference(e => e.EmployeeDepartment).Load(); // Load related data from Department table
+                // Reference() for one Navigation property
+
+                Console.WriteLine($"Dept Name : {emp01.EmployeeDepartment.Name}");
+            }
 
             #endregion
 

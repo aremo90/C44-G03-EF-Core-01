@@ -2,6 +2,7 @@
 using ConsoleApp1.Data;
 using ConsoleApp1.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
 namespace ConsoleApp1
 {
@@ -443,6 +444,118 @@ namespace ConsoleApp1
 
             #endregion
 
+
+            #endregion
+
+            #region Session 05
+            using MySroVtShardContext ShardDbContext = new MySroVtShardContext();
+
+            #region Local
+
+            /*
+             * Local works on the local data in memory AKA [In C#]
+             */
+
+            //var res = dBContext.Employees.Any(E => E.Age != null);
+            //Console.WriteLine(res);
+
+            //local
+            //var res = dBContext.Employees.Local.Any(E => E.Age != null);
+            //Console.WriteLine(res);
+
+
+            var emp01 = dBContext.Employees.FirstOrDefault();
+
+            if (emp01 != null)
+            {
+                Console.WriteLine($"Emp Name: {emp01.Name}");
+            }
+
+            var res = dBContext.Employees.Local.Any(E => E.Age == null);
+            Console.WriteLine(res);
+
+
+            #endregion
+
+            #region database first with Commands
+
+            /*
+             *  download Packages :-
+             *      - Microsoft.EntityFrameworkCore.SqlServer
+             *      - Microsoft.EntityFrameworkCore.Tools
+             *      - Microsoft.EntityFrameworkCore.Proxies (if you want to use lazy loading)
+             * 
+             *  use Database => Scaffold => Package Mangeer Console
+             */
+            //using MySroVtShard ShardDbContext = new MySroVtShard();
+
+            //var res03 = ShardDbContext.RefObjCommons.Where(O => O.Id > 1000);
+            //if (res03 != null)
+            //{
+            //    foreach (var item in res03)
+            //    {
+            //        Console.WriteLine($"ID: {item.Id} , Name: {item.CodeName128}");
+            //    }
+            //}
+
+            #endregion
+
+            #region database first with EF Core Power Tools
+
+            /*
+             *  download the extension => EF Core Power Tools
+             *  
+             *  dont forget to add TrustServerCertificate = true
+             */
+            //using MySroVtShardContext ShardDbContext = new MySroVtShardContext();
+            //var res04 = ShardDbContext.RefObjCommons.Where(O => O.Id > 1000);
+            //if (res04 != null)
+            //{
+            //    foreach (var item in res04)
+            //    {
+            //        Console.WriteLine($"ID: {item.Id} , Name: {item.CodeName128}");
+            //    }
+            //}
+            #endregion
+
+            #region Run Queries VIA App
+
+            #region Select
+
+            //int CommonID = 1000;
+
+            //var res05 = ShardDbContext.RefObjCommons.FromSqlRaw("SELECT * FROM _RefObjCommon WHERE ID = {0}" , CommonID);
+
+            //res05 = ShardDbContext.RefObjCommons.FromSqlInterpolated($"SELECT * FROM _RefObjCommon WHERE ID = {CommonID}");
+
+            //if (res05 != null)
+            //{
+            //    foreach (var item in res05)
+            //    {
+            //        Console.WriteLine($"ID: {item.Id} , Name: {item.CodeName128}");
+            //    }
+            //}
+
+            #endregion
+
+            #region Update - Delete
+            //int ID = 1001;
+            //var res06 = ShardDbContext.Database.ExecuteSqlRaw("UPDATE _RefObjCommon SET CodeName128 = 'CHN_11' WHERE ID = 1000");
+            //var res06 = ShardDbContext.Database.ExecuteSqlInterpolated($"UPDATE _RefObjCommon SET CodeName128 = 'CHN_22' WHERE ID = {ID}");
+
+            //Console.WriteLine(res06);
+
+            //var res07 = ShardDbContext.Database.ExecuteSqlRaw("DELETE FROM _RefObjCommon WHERE ID = 62972");
+
+            #endregion
+
+            #endregion
+
+            #region Views
+
+            var res08 = ShardDbContext.TimItemOnChars.Where(I => I.CharId > 1000);
+
+            #endregion
 
             #endregion
 

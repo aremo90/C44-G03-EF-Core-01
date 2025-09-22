@@ -1,0 +1,66 @@
+﻿{
+   "CodeGenerationMode": 5,
+   "ContextClassName": "MySroVtShardContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "MinimumProductVersion": "2.6.1166",
+   "ModelNamespace": "DbFirsrtModels",
+   "OutputContextPath": "Contexts",
+   "OutputPath": "DbFirstModels",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "ConsoleApp1",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[_RefObjChar]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[_RefObjCommon]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[_RefObjItem]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[_RefObjStruct]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TimItemOnChar]",
+         "ObjectType": 3
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": true,
+   "UseDatabaseNames": false,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": true,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": true,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": true,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false
+}

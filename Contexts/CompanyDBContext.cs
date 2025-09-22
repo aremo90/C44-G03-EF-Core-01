@@ -24,7 +24,9 @@ namespace ConsoleApp1.Contexts
             // connect between c# with database
             // connection string => server name, database name
             //optionsBuilder.UseSqlServer("Data Source = . ; Initial Catlog = CompanyDB ; Integrated Security = True");
-            optionsBuilder.UseSqlServer("Server=. ; Database=CompanyDB ; Trusted_Connection = True ; TrustServerCertificate = True ;");
+            optionsBuilder.UseSqlServer("Server=. ; Database=CompanyDB ; Trusted_Connection = True ; TrustServerCertificate = True ;")
+                .UseLazyLoadingProxies(); // Lazy loading enabled
+
         }
 
         #region FluentApi
@@ -95,11 +97,27 @@ namespace ConsoleApp1.Contexts
 
         #endregion
 
+        #region
         public DbSet<Employee> Employees { get; set; }
         public DbSet<User> Users { get; set; }
 
         public DbSet<Department> Departments { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
-        }
+        #endregion
+
+        #region table per Concrete Type
+
+        //public DbSet<FullTimeEmp> FullTimeEmployees { get; set; }
+        //public DbSet<PartTimeEmp> PartTimeEmployees { get; set; }
+
+        #endregion
+
+        #region TPH
+        public DbSet<EmployeeInherit> EmployeeInherit { get; set; }
+        public DbSet<FullTimeEmp> FullTimeEmployees { get; set; }
+        public DbSet<PartTimeEmp> PartTimeEmployees { get; set; }
+        #endregion
+
+    }
 }

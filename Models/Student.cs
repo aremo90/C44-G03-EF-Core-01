@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 namespace ConsoleApp1.Models
 {
@@ -13,6 +16,6 @@ namespace ConsoleApp1.Models
 
 
         // Nav prop many to many
-        public ICollection<Course> Courses { get; set; } = new HashSet<Course>();
+        public virtual ICollection<Course> Courses { get; set; } = new HashSet<Course>();
     }
 }

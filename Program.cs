@@ -224,7 +224,7 @@ namespace ConsoleApp1
             #endregion
             #region Dynamic Data Seeding
 
-            bool flag = CompanyDbContexetSeed.Seed(dBContext);
+            //bool flag = CompanyDbContexetSeed.Seed(dBContext);
 
             //if (flag)
             //    Console.WriteLine("Data Added Susccufly");
@@ -272,21 +272,177 @@ namespace ConsoleApp1
             // first request to retrieve data
             // second request to retrieve related data
 
-            var emp01 = dBContext.Employees.FirstOrDefault(e => e.Id == 5); // Data from Employees table
-            
-            if(emp01 != null)
-            {
-                Console.WriteLine($"Emp Name : {emp01.Name}");
-                Console.WriteLine($"Dept ID  : {emp01.DeptId}");
-                //Console.WriteLine($"Dept Name : {emp01.EmployeeDepartment.Name}"); => Error because EmployeeDepartment is null
+            //var emp01 = dBContext.Employees.FirstOrDefault(e => e.Id == 5); // Data from Employees table
 
-                dBContext.Entry(emp01).Reference(e => e.EmployeeDepartment).Load(); // Load related data from Department table
-                // Reference() for one Navigation property
+            //if(emp01 != null)
+            //{
+            //    Console.WriteLine($"Emp Name : {emp01.Name}");
+            //    Console.WriteLine($"Dept ID  : {emp01.DeptId}");
+            //    //Console.WriteLine($"Dept Name : {emp01.EmployeeDepartment.Name}"); => Error because EmployeeDepartment is null
 
-                Console.WriteLine($"Dept Name : {emp01.EmployeeDepartment.Name}");
-            }
+            //    dBContext.Entry(emp01).Reference(e => e.EmployeeDepartment).Load(); // Load related data from Department table
+            //    // Reference() for one Navigation property
+
+            //    Console.WriteLine($"Dept Name : {emp01.EmployeeDepartment.Name}");
+            //}
 
             #endregion
+
+            #endregion
+
+            #region Session 04
+
+            #region Lazy Loading
+
+            /*
+             * Enable lazy loading in your project :-
+             *      1. Install the package Microsoft.EntityFrameworkCore.Proxies
+             *      2. Configure your DbContext to use lazy loading proxies by overriding the OnConfiguring method in your DbContext class
+             *      3. Make your navigation properties virtual in your entity classes and Classes must be public
+             * 
+             * 
+             */
+
+            //var emp02 = dBContext.Employees.FirstOrDefault(e => e.Id == 5);
+
+            //if (emp02 != null)
+            //{
+            //    Console.WriteLine($"Emp Name: ${emp02.Name}");
+            //    Console.WriteLine($"Dept ID: ${emp02.DeptId}");
+            //    Console.WriteLine($"Dept Name: ${emp02.EmployeeDepartment?.Name}"); // when access EmployeeDepartment it will load related data from Department table
+            //}
+
+            #endregion
+
+            #region Join Queries
+
+            #region Problem #1
+
+            // Inner Join or Group join only
+
+            //var res = dBContext.Departments.Join(dBContext.Employees,
+            //                                     D => D.Id,
+            //                                     E => E.DeptId,
+            //                                     (D, E) => new
+            //                                     {
+            //                                         EmpName = E.Name,
+            //                                         EmpID = E.Id,
+            //                                         DeptID = D.Id,
+            //                                         DeptName = D.Name
+            //                                     });
+
+            //var res = from D in dBContext.Departments
+            //          join E in dBContext.Employees
+            //          on D.Id equals E.DeptId
+            //          select new
+            //          {
+            //              EmpName = E.Name,
+            //              EmpID = E.Id,
+            //              DeptID = D.Id,
+            //              DeptName = D.Name
+            //          };
+
+            //foreach (var item in res)
+            //{
+            //    Console.WriteLine($"EmpID: {item.EmpID} , EmpName: {item.EmpName} , DeptID: {item.DeptID} , DeptName: {item.DeptName}");
+            //}   
+            #endregion
+
+            #region Group Join - Left Outer Join
+
+            #region Get all Departments that has Employees or not
+
+            //var res = dBContext.Departments.GroupJoin(dBContext.Employees,
+            //                                     D => D.Id,
+            //                                     E => E.DeptId,
+            //                                     (D, Emps) => new
+            //                                     {
+            //                                         DeptID = D.Id,
+            //                                         DeptName = D.Name,
+            //                                         Employees = Emps
+            //                                     });
+            //foreach (var item in res)
+            //{
+            //    Console.WriteLine($"DeptID: {item.DeptID} , DeptName: {item.DeptName}");
+            //    if (item.Employees != null && item.Employees.Count() > 0)
+            //    {
+            //        foreach (var emp in item.Employees)
+            //        {
+            //            Console.WriteLine($"\t EmpID: {emp.Id} , EmpName: {emp.Name}");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine($"\t No Employees");
+            //    }
+            //}
+
+            #endregion
+
+            #endregion
+
+            #region Right Outer Join
+
+            /*
+             *  EF core does not support right outer join directly
+             *  But you can achieve similar results using left join by reversing the order of the tables
+             */
+
+
+            #endregion
+
+            #region Cross Join
+
+            /*
+             *  EF core does not support cross join directly
+             *  But you can achieve similar results using SelectMany method
+             *  or when you select from two tables without any join condition
+             *  
+             *  var res = from e in dbContext.Employees
+                from d in dbContext.Departments
+                select new { e.Name, d.DeptName };
+             */
+
+            #endregion
+
+            #endregion
+
+            #region TPCT
+
+            //FullTimeEmp ftEmp = new FullTimeEmp()
+            //{
+            //    Name = "Ali",
+            //    Age = 30,
+            //    Salary = 8000,
+            //    StartDate = DateTime.Now,
+            //    Address = "Cairo",
+            //};  
+
+            //PartTimeEmp ptEmp = new PartTimeEmp()
+            //{
+            //    Name = "Omar",
+            //    Age = 22,
+            //    Address = "Giza",
+            //    CountOfHours = 100,
+            //    HourRate = 50,
+            //};
+
+            //dBContext.Add(ftEmp);
+            //dBContext.Add(ptEmp);
+            //dBContext.SaveChanges();
+
+            //var FTE = (from fte in dBContext.FullTimeEmployees
+            //           select fte).FirstOrDefault();
+            //Console.WriteLine($"{FTE.Name} - {FTE.Age}");
+
+            #endregion
+
+            #region TPH
+
+
+
+            #endregion
+
 
             #endregion
 

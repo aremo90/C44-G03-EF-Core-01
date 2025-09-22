@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 namespace ConsoleApp1.Models
 {
     // POCO Class == entity == model
@@ -21,7 +23,7 @@ namespace ConsoleApp1.Models
         public int? DeptId { get; set; }
 
         // Navigation Property (Many-to-One)
-        public Department EmployeeDepartment { get; set; } = null!;
+        public virtual Department EmployeeDepartment { get; set; } = null!;
     }
 }
 
